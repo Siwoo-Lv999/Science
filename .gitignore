@@ -1,0 +1,28 @@
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]serSettings/
+
+# MemoryCaptures and Recordings
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Visual Studio / Rider cache
+.vs/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.pidb
+*.booproj
+*.user
+*.userprefs
+*.pidb.meta
+.idea/.idea.Science/.idea/misc.xml
+.idea/.idea.Science/.idea/.gitignore
+.idea/.idea.Science/.idea/encodings.xml
+.idea/.idea.Science/.idea/indexLayout.xml
