@@ -255,8 +255,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Members.Lumen._01._Code.PlayerCode.PlayerMover
   moveSpeed: 10
-  jumpForce: 3
+  jumpForce: 5
   jumpCooldown: 1
+  gravityPower: 0.3
+  checkSetting:
+    offset: {x: 0, y: 0}
+    size: {x: 0, y: 0}
+    whatIsGround:
+      serializedVersion: 2
+      m_Bits: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

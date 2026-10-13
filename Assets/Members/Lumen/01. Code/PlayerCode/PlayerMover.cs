@@ -17,6 +17,7 @@ namespace Members.Lumen._01._Code.PlayerCode
         [SerializeField] private float moveSpeed;
         [SerializeField] private float jumpForce;
         [SerializeField] private float jumpCooldown = 1f;
+        [SerializeField] private float gravityPower;
         [SerializeField] private GroundCheckSet checkSetting;
         
         private Rigidbody2D _rb;
@@ -42,6 +43,9 @@ namespace Members.Lumen._01._Code.PlayerCode
 
         private void FixedUpdate()
         {
+            if (_rb.linearVelocityY < 0)
+                _rb.linearVelocityY -= gravityPower;
+            
             Collider2D ground = Physics2D.OverlapBox(checkSetting.offset, checkSetting.size, checkSetting.whatIsGround);
             if (ground == null)
                 _canJump = false;
