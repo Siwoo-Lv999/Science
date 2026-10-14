@@ -256,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Members.Lumen._01._Code.PlayerCode.PlayerMover
   moveSpeed: 10
   jumpForce: 5
-  jumpCooldown: 1
+  jumpCooldown: 0
   gravityPower: 0.3
   checkSetting:
     offset: {x: 0, y: 0}
@@ -1228,7 +1228,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &1461520148
 Transform:
   m_ObjectHideFlags: 0
