@@ -18,6 +18,8 @@ public class ShowText : MonoBehaviour
             directionText.text = currentModel.IsLeft ? "N" : "S";
         };
     }
+    
+    
 
 
    
