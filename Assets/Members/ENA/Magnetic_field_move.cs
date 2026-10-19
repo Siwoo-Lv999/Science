@@ -18,7 +18,7 @@ public class Magnetic_field_move : MonoBehaviour
         DetectPlayer();
         AddForce();
     }
-
+          
     private void AddForce(Quaternion quat)
     {
         Vector3 dir = quat * Vector3.forward;
