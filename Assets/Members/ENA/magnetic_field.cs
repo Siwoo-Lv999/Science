@@ -5,20 +5,44 @@ namespace Members.ENA
 {
     public class magnetic_field : MonoBehaviour
     {
-        Compass compass;
-        public GameObject N;
-        public GameObject S;
-
+        [SerializeField] private Quaternion Deg;
+        [SerializeField] private float DetectRange;
+        [SerializeField] Collider2D player;
+        [SerializeField] public bool clockWise;
+        Magnetic_field_move magnetic;
+        public Collider2D DetectPlayer()
+        {
+            return Physics2D.OverlapCircle(transform.position, DetectRange);
+        }
         private void Awake()
         {
-            compass = GetComponent<Compass>();
+            magnetic = GetComponent<Magnetic_field_move>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (N != null) N.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, compass.n);
-
-            if (S != null) S.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, compass.s);
+            player=DetectPlayer();
+            if (player != null)
+            {
+                Vector2 dir = player.transform.position - gameObject.transform.position;
+                float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                if (clockWise)
+                {
+                    Deg = Quaternion.Euler(0, 0, deg + 90);
+                    magnetic.AddForce(Deg,player.transform);
+                    
+                }
+                else if (!clockWise)
+                {
+                    Deg = Quaternion.Euler(0, 0, deg + 270);
+                    magnetic.AddForce(Deg,player.transform);
+                }
+            }
+        }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, DetectRange);
         }
     }
 }

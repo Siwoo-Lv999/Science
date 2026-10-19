@@ -7,7 +7,7 @@ namespace Members.ENA
     public class Compass : MonoBehaviour
     {
         [SerializeField] private GameObject line;
-        [SerializeField] private bool clockWise;
+        [SerializeField] private magnetic_field _magneticField;
         private bool prev;
         [Header("DIR")]
         [SerializeField] private string up;
@@ -15,36 +15,37 @@ namespace Members.ENA
         [Header("Deg")]
         [SerializeField] public float n;
         [SerializeField] public float s;
+        public GameObject N;
+        public GameObject S;
         private MagneticSystem magnetic;
         private void Awake()
         {
             magnetic = new MagneticSystem();
         }
-
-        private void Start()
-        {
-        }
         private void Update()
         {
             electDir();
-            if (magnetic.Magnetic(clockWise) == nameof(MagnetDir.ClockWise))
+            if (magnetic.Magnetic(_magneticField.clockWise) == nameof(MagnetDir.ClockWise))
             {
-                if (prev == !clockWise)
+                if (prev == !_magneticField.clockWise)
                 {
-                    prev = clockWise;
+                    prev = _magneticField.clockWise;
                 }
                 up = "N";
                 down = "S";
             }
-            else if (magnetic.Magnetic(clockWise) == nameof(MagnetDir.CounterClockwise))
+            else if (magnetic.Magnetic(_magneticField.clockWise) == nameof(MagnetDir.CounterClockwise))
             {
-                if (prev == !clockWise)
+                if (prev == !_magneticField.clockWise)
                 {
-                    prev = clockWise;
+                    prev = _magneticField.clockWise;
                 }
                 up = "S";
                 down = "N";
             }
+            if (N != null) N.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, n);
+
+            if (S != null) S.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, s);
         }
 
         private void electDir()

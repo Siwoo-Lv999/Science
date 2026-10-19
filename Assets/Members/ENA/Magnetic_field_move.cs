@@ -1,28 +1,27 @@
+using System;
 using UnityEngine;
 
 public class Magnetic_field_move : MonoBehaviour
 {
-    private Collider2D player;
-    [SerializeField] private float speed;
-    [SerializeField] private float DetectRange;
-    void DetectPlayer()
-    {
-        Collider2D obj = Physics2D.OverlapCircle(transform.position, DetectRange);
-        if (obj != null && obj.TryGetComponent(out Rigidbody2D rb))
-        {
-            player = obj;
-        }
-    }
-    void Update()
-    {
-        DetectPlayer();
-        AddForce();
-    }
+    public float maxForce = 100f;
+    public float detectRange = 10f;
 
-    private void AddForce(Quaternion quat)
+    public void AddForce(Quaternion quat, Transform rigid)
     {
-        Vector3 dir = quat * Vector3.forward;
-        dir.Normalize();
-        player.GetComponent<Rigidbody2D>().AddForce(dir*speed, ForceMode2D.Impulse);
+        Rigidbody2D rb = rigid.GetComponent<Rigidbody2D>();
+        if (rb == null) return;
+
+        Vector2 dir = quat * Vector2.right;
+
+        float distance = Vector2.Distance(
+            transform.position,
+            rigid.position
+        );
+
+        float ratio = Mathf.Clamp01(1f - distance / detectRange);
+
+        float force = maxForce * ratio;
+
+        rb.AddForce(dir * force, ForceMode2D.Force);
     }
 }
