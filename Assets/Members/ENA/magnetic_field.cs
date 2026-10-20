@@ -29,13 +29,13 @@ namespace Members.ENA
                 if (clockWise)
                 {
                     Deg = Quaternion.Euler(0, 0, deg + 90);
-                    magnetic.AddForce(Deg,player.transform);
+                    magnetic.AddForce(Deg,player.transform,DetectRange);
                     
                 }
                 else if (!clockWise)
                 {
                     Deg = Quaternion.Euler(0, 0, deg + 270);
-                    magnetic.AddForce(Deg,player.transform);
+                    magnetic.AddForce(Deg,player.transform,DetectRange);
                 }
             }
         }
