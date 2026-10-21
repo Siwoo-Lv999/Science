@@ -7,6 +7,7 @@ namespace Members.ENA
     public class Compass : MonoBehaviour
     {
         [SerializeField] private GameObject line;
+        [Header("line 넣으면 자동 할당")]
         [SerializeField] private magnetic_field _magneticField;
         private bool prev;
         [Header("DIR")]
@@ -21,6 +22,12 @@ namespace Members.ENA
         private void Awake()
         {
             magnetic = new MagneticSystem();
+        }
+
+        private void OnValidate()
+        {
+            if (line!=null)
+             _magneticField = line.GetComponent<magnetic_field>();
         }
         private void Update()
         {
